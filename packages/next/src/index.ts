@@ -1265,9 +1265,10 @@ export const build: BuildV2 = async buildOptions => {
      * This is a detection for preview mode that's required for the pages
      * router.
      */
-    const canUsePreviewMode = Object.keys(pages).some(page =>
-      isApiPage(pages[page].fsPath)
-    );
+    const canUsePreviewMode = Object.keys(pages).some(page => {
+      const fsPath = pages[page]?.fsPath;
+      return !!fsPath && isApiPage(fsPath);
+    });
     const originalStaticPages = await glob('**/*.html', pagesDir);
     staticPages = filterStaticPages(
       originalStaticPages,
@@ -1604,6 +1605,9 @@ export const build: BuildV2 = async buildOptions => {
     const nonApiPages: string[] = [];
 
     for (const page of pageKeys) {
+      if (!pages[page]?.fsPath) {
+        continue;
+      }
       const pagePath = pages[page].fsPath;
       const route = `/${page.replace(/\.js$/, '')}`;
 
@@ -1615,11 +1619,13 @@ export const build: BuildV2 = async buildOptions => {
         nonApiPages.push(page);
       }
 
-      compressedPages[page] = (
-        await createPseudoLayer({
-          [page]: pages[page],
-        })
-      ).pseudoLayer[page] as PseudoFile;
+      if (pages[page]) {
+        compressedPages[page] = (
+          await createPseudoLayer({
+            [page]: pages[page],
+          })
+        ).pseudoLayer[page] as PseudoFile;
+      }
     }
     const mergedPageKeys: string[] = [...nonApiPages, ...apiPages];
 
@@ -1637,7 +1643,11 @@ export const build: BuildV2 = async buildOptions => {
       const nftCache = Object.create(null);
       const lstatSema = new Sema(25);
       const lstatResults: { [key: string]: ReturnType<typeof lstat> } = {};
-      const pathsToTrace = mergedPageKeys.map(page => pages[page].fsPath);
+      const pathsToTrace = mergedPageKeys
+        .map(page => {
+          return pages[page]?.fsPath;
+        })
+        .filter(Boolean) as string[];
 
       const result = await nodeFileTrace(pathsToTrace, {
         base: baseDir,
@@ -1652,6 +1662,9 @@ export const build: BuildV2 = async buildOptions => {
       );
 
       for (const page of mergedPageKeys) {
+        if (!pages[page]?.fsPath) {
+          continue;
+        }
         const fileList = parentFilesMap.get(
           path.relative(baseDir, pages[page].fsPath)
         );
@@ -1829,6 +1842,9 @@ export const build: BuildV2 = async buildOptions => {
             continue;
           }
 
+          if (!pages[page]?.fsPath) {
+            continue;
+          }
           const pageFileName = path.normalize(
             path.relative(workPath, pages[page].fsPath)
           );
@@ -1950,6 +1966,9 @@ export const build: BuildV2 = async buildOptions => {
             dynamicPages.push(normalizePage(pathname));
           }
 
+          if (!pages[page]?.fsPath) {
+            return;
+          }
           const pageFileName = path.normalize(
             path.relative(entryPath, pages[page].fsPath)
           );

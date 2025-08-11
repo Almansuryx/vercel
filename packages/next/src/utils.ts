@@ -957,6 +957,10 @@ export async function createPseudoLayer(files: {
   for (const fileName of Object.keys(files)) {
     const file = files[fileName];
 
+    if (!file) {
+      continue;
+    }
+
     if (isSymbolicLink(file.mode)) {
       const symlinkTarget = await fs.readlink(file.fsPath);
       pseudoLayer[fileName] = {
@@ -1895,7 +1899,7 @@ export async function getPageLambdaGroups({
                 }
               });
               newTracedFilesUncompressedSize +=
-                compressedPages[newPage].uncompressedSize;
+                compressedPages[newPage]?.uncompressedSize || 0;
             }
 
             const underUncompressedLimit =
@@ -1939,7 +1943,7 @@ export async function getPageLambdaGroups({
       // ensure the page file itself is accounted for when grouping as
       // large pages can be created that can push the group over the limit
       matchingGroup!.pseudoLayerUncompressedBytes +=
-        compressedPages[newPage].uncompressedSize;
+        compressedPages[newPage]?.uncompressedSize || 0;
     }
   }
 
@@ -2023,7 +2027,7 @@ export const outputFunctionFileSizeInfo = (
 
   for (const page of pages) {
     dependencies[`pages/${page}`] = {
-      uncompressed: compressedPages[page].uncompressedSize,
+      uncompressed: compressedPages[page]?.uncompressedSize || 0,
     };
   }
   let numLargeDependencies = 0;
