@@ -87,26 +87,26 @@ describe('logs', () => {
         "
           ▲ vercel logs url|deploymentId [options]
 
-          Display runtime logs for a deployment in ready state, from now and for 5      
-          minutes at most.                                                              
+          Display runtime logs for a deployment in ready state, from now and for 5
+          minutes at most.
 
           Options:
 
-          -j,  --json  Print each log line as a JSON object (compatible with JQ)        
+          -j,  --json  Print each log line as a JSON object (compatible with JQ)
 
 
           Global Options:
 
-               --cwd <DIR>            Sets the current working directory for a single   
-                                      run of a command                                  
-          -d,  --debug                Debug mode (default off)                          
-          -Q,  --global-config <DIR>  Path to the global \`.vercel\` directory            
-          -h,  --help                 Output usage information                          
-          -A,  --local-config <FILE>  Path to the local \`vercel.json\` file              
-               --no-color             No color mode (default off)                       
-          -S,  --scope                Set a custom scope                                
-          -t,  --token <TOKEN>        Login token                                       
-          -v,  --version              Output the version number                         
+               --cwd <DIR>            Sets the current working directory for a single
+                                      run of a command
+          -d,  --debug                Debug mode (default off)
+          -Q,  --global-config <DIR>  Path to the global \`.vercel\` directory
+          -h,  --help                 Output usage information
+          -A,  --local-config <FILE>  Path to the local \`vercel.json\` file
+               --no-color             No color mode (default off)
+          -S,  --scope                Set a custom scope
+          -t,  --token <TOKEN>        Login token
+          -v,  --version              Output the version number
 
 
           Examples:
@@ -267,9 +267,6 @@ describe('logs', () => {
 `
       );
       const output = client.getFullOutput();
-      expect(output).toContain(
-        `This command now displays runtime logs. To access your build logs, run \`vercel inspect --logs ${deployment.url}\``
-      );
       // 3nd line is time dependent and others are blank lines
       expect(output.split('\n').slice(4).join('\n')).toMatchInlineSnapshot(`
         "waiting for new logs...
@@ -310,9 +307,7 @@ describe('logs', () => {
         `Fetching deployment "${deployment.url}" in ${user.username}
 `
       );
-      expect(client.getFullOutput()).toContain(
-        `This command now displays runtime logs. To access your build logs, run \`vercel inspect --logs ${deployment.url}\``
-      );
+
       expect(client.stdout.getFullOutput())
         .toContain(`{"rowId":1,"timestampInMs":1717426870339,"level":"info","message":"Hello, world!","messageTruncated":false,"domain":"acme.com","requestMethod":"GET","requestPath":"/","responseStatusCode":200}
 {"rowId":2,"timestampInMs":1717426870540,"message":"Bye...","messageTruncated":false,"domain":"acme.com","requestMethod":"OPTION","requestPath":"/logout","responseStatusCode":204}`);
