@@ -1,0 +1,325 @@
+import React from "react"; import { motion } from "framer-motion"; import { Button } from "@/components/ui/button"; import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"; import { Input } from "@/components/ui/input"; import { Textarea } from "@/components/ui/textarea"; import { CheckCircle, PhoneCall, MessageCircle, Mail, ArrowRight, Stars, Wand2, Image, Palette, Globe, Instagram, Facebook, Twitter, Youtube, ShieldCheck, Clock, BadgeCheck } from "lucide-react";
+
+// Utility: WhatsApp link with prefilled text const waMessage = encodeURIComponent( "Hi Elsadeeq Creative Studio, I'm interested in your graphic design services. How can I get started?" ); const whatsappLink = https://wa.me/2349016593687?text=${waMessage}; // 09016593687 (NG) → +2349016593687
+
+// Reusable animation variants const fadeUp = { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 }, };
+
+export default function ElsadeeqCreativeStudioSite() { return ( <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 text-slate-900"> {/* NAVBAR */} <header className="sticky top-0 z-50 backdrop-blur bg-white/70 border-b border-slate-200"> <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between"> <div className="flex items-center gap-2"> <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-indigo-600 via-violet-500 to-fuchsia-500 shadow-md" /> <span className="font-bold text-lg tracking-tight">Elsadeeq Creative Studio</span> </div> <nav className="hidden md:flex items-center gap-6 text-sm"> <a href="#services" className="hover:text-indigo-600">Services</a> <a href="#portfolio" className="hover:text-indigo-600">Portfolio</a> <a href="#pricing" className="hover:text-indigo-600">Pricing</a> <a href="#about" className="hover:text-indigo-600">About</a> <a href="#contact" className="hover:text-indigo-600">Contact</a> </nav> <div className="flex items-center gap-2"> <a href={whatsappLink} target="_blank" rel="noreferrer"> <Button className="rounded-2xl shadow-sm">Chat on WhatsApp</Button> </a> </div> </div> </header>
+
+{/* HERO */}
+  <section className="relative overflow-hidden">
+    <div className="absolute inset-0 -z-10">
+      <div className="absolute -top-24 -left-24 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl" />
+      <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-fuchsia-500/10 rounded-full blur-3xl" />
+    </div>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 grid md:grid-cols-2 gap-10 items-center">
+      <motion.div initial={fadeUp.initial} animate={fadeUp.animate} transition={{ duration: 0.6 }}>
+        <span className="inline-flex items-center gap-2 text-xs px-3 py-1 rounded-full border border-slate-200 bg-white shadow-sm mb-4">
+          <Stars className="w-4 h-4" /> Elevate your brand visuals
+        </span>
+        <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
+          Creative Design & Advertising that <span className="bg-gradient-to-r from-indigo-600 to-fuchsia-600 bg-clip-text text-transparent">gets you clients</span>
+        </h1>
+        <p className="mt-4 text-slate-600 max-w-xl">
+          We craft scroll-stopping graphics, logos, social ads, flyers, and modern websites for businesses that want results. From idea to polished delivery — done fast, done right.
+        </p>
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          <a href={whatsappLink} target="_blank" rel="noreferrer">
+            <Button className="h-12 px-6 rounded-2xl text-base">
+              <MessageCircle className="w-5 h-5 mr-2" /> Start on WhatsApp
+            </Button>
+          </a>
+          <a href="#portfolio">
+            <Button variant="outline" className="h-12 px-6 rounded-2xl text-base">
+              See Portfolio <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+          </a>
+        </div>
+        <div className="mt-6 flex items-center gap-6 text-sm text-slate-500">
+          <span className="inline-flex items-center gap-2"><ShieldCheck className="w-4 h-4"/> 100% Satisfaction</span>
+          <span className="inline-flex items-center gap-2"><Clock className="w-4 h-4"/> Fast Turnaround</span>
+          <span className="inline-flex items-center gap-2"><BadgeCheck className="w-4 h-4"/> Proven Quality</span>
+        </div>
+      </motion.div>
+
+      <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6, delay: 0.1 }} className="relative">
+        <div className="relative rounded-2xl shadow-xl overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop"
+            alt="Creative workspace"
+            className="w-full h-[420px] object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/10 to-transparent" />
+          <div className="absolute bottom-4 left-4 right-4 text-white">
+            <div className="flex items-center gap-2 text-xs">
+              <Wand2 className="w-4 h-4" /> Branding • Graphics • Web • Ads
+            </div>
+            <div className="mt-1 font-semibold">Elsadeeq Creative Studio</div>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  </section>
+
+  {/* SERVICES */}
+  <section id="services" className="py-16 md:py-24 bg-white">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.h2 initial={fadeUp.initial} whileInView={fadeUp.animate} viewport={{ once: true }} className="text-3xl md:text-4xl font-bold">Services</motion.h2>
+      <p className="mt-2 text-slate-600">Everything you need to launch and grow a standout brand.</p>
+
+      <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {[
+          { icon: Palette, title: "Branding & Logo", desc: "Unique brand identity, logo suites, color systems, guidelines." },
+          { icon: Image, title: "Graphics & Flyers", desc: "Posters, carousels, banners, roll-ups, business cards, billboards." },
+          { icon: Globe, title: "Web Design", desc: "Fast, responsive websites that convert — landing pages & multi-page sites." },
+          { icon: Stars, title: "Social Media Ads", desc: "High-converting ad creatives for Facebook, Instagram, TikTok, YouTube." },
+          { icon: Mail, title: "Digital Collateral", desc: "Pitch decks, brochures, media kits, price lists, brand profiles." },
+          { icon: PhoneCall, title: "Consult & Support", desc: "Ongoing creative support, design audit, and content plans." },
+        ].map((s, i) => (
+          <motion.div key={s.title} initial={fadeUp.initial} whileInView={fadeUp.animate} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
+            <Card className="rounded-2xl">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-3">
+                  <s.icon className="w-5 h-5" /> {s.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-slate-600">{s.desc}</p>
+                <a href={whatsappLink} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 mt-4 text-sm text-indigo-600 hover:underline">
+                  Get started <ArrowRight className="w-4 h-4" />
+                </a>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* PORTFOLIO */}
+  <section id="portfolio" className="py-16 md:py-24 bg-slate-50">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.h2 initial={fadeUp.initial} whileInView={fadeUp.animate} viewport={{ once: true }} className="text-3xl md:text-4xl font-bold">Recent Work</motion.h2>
+      <p className="mt-2 text-slate-600">A peek at designs our clients love. Replace these with your real projects anytime.</p>
+
+      <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {[1,2,3,4,5,6].map((n) => (
+          <motion.div key={n} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <div className="group relative rounded-2xl overflow-hidden shadow-md">
+              <img src={`https://images.unsplash.com/photo-15${n}050${n}08023-c5249f4df085?q=80&w=1400&auto=format&fit=crop`} alt={`Portfolio ${n}`} className="w-full h-64 object-cover"/>
+              <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/30 transition" />
+              <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-white/90 backdrop-blur opacity-0 group-hover:opacity-100 transition">
+                <div className="font-semibold">Project #{n}</div>
+                <div className="text-sm text-slate-600">Branding • Social Post • Web</div>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* PROCESS */}
+  <section className="py-16 md:py-24 bg-white">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.h2 initial={fadeUp.initial} whileInView={fadeUp.animate} viewport={{ once: true }} className="text-3xl md:text-4xl font-bold">Simple Process</motion.h2>
+      <div className="mt-10 grid md:grid-cols-4 gap-6">
+        {[
+          { step: "1", title: "Discovery", desc: "Brief call or chat to understand goals and style." },
+          { step: "2", title: "Concepts", desc: "We present creative directions and moodboards." },
+          { step: "3", title: "Design", desc: "Iterate quickly with your feedback to refine." },
+          { step: "4", title: "Delivery", desc: "Get final files optimized for print & digital." },
+        ].map((x, i) => (
+          <motion.div key={x.step} initial={fadeUp.initial} whileInView={fadeUp.animate} viewport={{ once: true }} transition={{ delay: i * 0.05 }} className="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+            <div className="text-sm text-slate-500">Step {x.step}</div>
+            <div className="font-semibold text-lg mt-1">{x.title}</div>
+            <div className="text-slate-600 mt-2">{x.desc}</div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* PRICING */}
+  <section id="pricing" className="py-16 md:py-24 bg-slate-50">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.h2 initial={fadeUp.initial} whileInView={fadeUp.animate} viewport={{ once: true }} className="text-3xl md:text-4xl font-bold">Transparent Pricing</motion.h2>
+      <p className="mt-2 text-slate-600">Clear, flexible packages. Custom quotes available.</p>
+
+      <div className="mt-10 grid md:grid-cols-3 gap-6">
+        {[{
+          name: "Starter",
+          price: "₦35,000",
+          features: ["Logo (1 concept)", "2 social posts", "1 flyer/banner", "3-day delivery"],
+        },{
+          name: "Growth",
+          price: "₦85,000",
+          featured: true,
+          features: ["Logo (2 concepts)", "8 social posts", "Website landing page", "Priority support"],
+        },{
+          name: "Pro",
+          price: "₦180,000",
+          features: ["Full brand kit", "15 social posts", "Multi-page website", "Ad campaign setup"],
+        }].map((p, i) => (
+          <motion.div key={p.name} initial={fadeUp.initial} whileInView={fadeUp.animate} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
+            <Card className={`rounded-2xl ${p.featured ? 'border-indigo-600 shadow-lg' : ''}`}>
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  <span>{p.name}</span>
+                  <span className="text-2xl font-extrabold">{p.price}</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2">
+                  {p.features.map(f => (
+                    <li key={f} className="flex items-center gap-2 text-slate-700"><CheckCircle className="w-4 h-4"/> {f}</li>
+                  ))}
+                </ul>
+                <a href={whatsappLink} target="_blank" rel="noreferrer">
+                  <Button className="w-full mt-6 rounded-2xl">Choose {p.name}</Button>
+                </a>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ABOUT */}
+  <section id="about" className="py-16 md:py-24 bg-white">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.h2 initial={fadeUp.initial} whileInView={fadeUp.animate} viewport={{ once: true }} className="text-3xl md:text-4xl font-bold">About Elsadeeq Creative Studio</motion.h2>
+      <div className="mt-6 grid md:grid-cols-3 gap-6 items-start">
+        <div className="md:col-span-2 text-slate-700 leading-relaxed">
+          <p>
+            We are a Kano-based creative studio helping ambitious brands look premium and sell more. For 3+ years, we’ve delivered impactful graphics, clean websites, and ad creatives that convert — especially for Hausa-speaking audiences.
+          </p>
+          <p className="mt-4">
+            Tools we love: Figma, Photoshop, Illustrator, CapCut, and modern web frameworks. Platforms we design for: Instagram, Facebook, TikTok, YouTube, and print.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a href={whatsappLink} target="_blank" rel="noreferrer"><Button className="rounded-2xl"><MessageCircle className="w-4 h-4 mr-2"/>Talk to us</Button></a>
+            <a href="#portfolio"><Button variant="outline" className="rounded-2xl">View Portfolio</Button></a>
+          </div>
+        </div>
+        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+          <div className="text-sm font-semibold">Quick Facts</div>
+          <ul className="mt-3 space-y-2 text-sm text-slate-600">
+            <li>• Based in Kano, Nigeria</li>
+            <li>• Hausa + English content</li>
+            <li>• Fast-response WhatsApp support</li>
+            <li>• Serving SMEs, creators, NGOs</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* TESTIMONIALS */}
+  <section className="py-16 md:py-24 bg-slate-50">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.h2 initial={fadeUp.initial} whileInView={fadeUp.animate} viewport={{ once: true }} className="text-3xl md:text-4xl font-bold">Clients Say</motion.h2>
+      <div className="mt-10 grid md:grid-cols-3 gap-6">
+        {[{
+          quote: "Our engagement doubled after the new Instagram designs.", name: "Amina — Boutique Owner"
+        },{
+          quote: "They built our landing page in days. Clean and effective.", name: "Haruna — Startup Founder"
+        },{
+          quote: "Posters and flyers always on time and on brand.", name: "Maryam — Event Planner"
+        }].map((t, i) => (
+          <motion.div key={i} initial={fadeUp.initial} whileInView={fadeUp.animate} viewport={{ once: true }}>
+            <Card className="rounded-2xl">
+              <CardContent className="pt-6">
+                <p className="text-slate-700">“{t.quote}”</p>
+                <div className="mt-4 text-sm text-slate-500">{t.name}</div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* FAQ */}
+  <section className="py-16 md:py-24 bg-white">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.h2 initial={fadeUp.initial} whileInView={fadeUp.animate} viewport={{ once: true }} className="text-3xl md:text-4xl font-bold">FAQ</motion.h2>
+      <div className="mt-6 grid md:grid-cols-2 gap-6">
+        {[{
+          q: "How fast is delivery?",
+          a: "Starter designs ship in 48–72 hours. Bigger projects have timelines we agree on upfront."
+        },{
+          q: "Do you support Hausa content?",
+          a: "Absolutely. We create in Hausa and English, including culturally-relevant ad creatives."
+        },{
+          q: "Can you manage my socials?",
+          a: "Yes. We design monthly content packs and can help with posting schedules."
+        },{
+          q: "What file formats do I get?",
+          a: "Print-ready PDFs, PNG/JPG, and editable source files on request."
+        }].map((f, i) => (
+          <div key={i} className="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+            <div className="font-semibold">{f.q}</div>
+            <div className="mt-2 text-slate-600">{f.a}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* CONTACT */}
+  <section id="contact" className="py-16 md:py-24 bg-slate-50">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.h2 initial={fadeUp.initial} whileInView={fadeUp.animate} viewport={{ once: true }} className="text-3xl md:text-4xl font-bold">Contact</motion.h2>
+      <div className="mt-8 grid md:grid-cols-2 gap-6">
+        <Card className="rounded-2xl">
+          <CardHeader>
+            <CardTitle>Send a Message</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <form className="space-y-3">
+              <Input placeholder="Your name" />
+              <Input placeholder="Email (optional)" defaultValue="sadeeqibrahim38@gmail.com" />
+              <Textarea rows={5} placeholder="Tell us what you need..." />
+              <div className="flex items-center gap-2">
+                <a href={whatsappLink} target="_blank" rel="noreferrer" className="w-full">
+                  <Button className="w-full rounded-2xl">
+                    <MessageCircle className="w-4 h-4 mr-2" /> Continue on WhatsApp
+                  </Button>
+                </a>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
+
+        <div className="p-6 rounded-2xl bg-white border border-slate-200">
+          <div className="text-sm text-slate-500">Prefer a quick chat?</div>
+          <a href={whatsappLink} target="_blank" rel="noreferrer" className="mt-2 inline-flex items-center gap-2 text-lg font-semibold text-indigo-600 hover:underline">
+            <MessageCircle className="w-5 h-5"/> +234 901 659 3687
+          </a>
+          <div className="mt-4 text-sm text-slate-600">
+            We usually reply in minutes during 7am–9pm (WAT). Pickup: Kano.
+          </div>
+          <div className="mt-6 flex items-center gap-4 text-slate-500">
+            <a href="#" className="hover:text-slate-900"><Instagram className="w-5 h-5"/></a>
+            <a href="#" className="hover:text-slate-900"><Facebook className="w-5 h-5"/></a>
+            <a href="#" className="hover:text-slate-900"><Twitter className="w-5 h-5"/></a>
+            <a href="#" className="hover:text-slate-900"><Youtube className="w-5 h-5"/></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* FOOTER */}
+  <footer className="py-8 bg-white border-t border-slate-200">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="text-sm text-slate-600">© {new Date().getFullYear()} Elsadeeq Creative Studio. All rights reserved.</div>
+      <div className="text-sm text-slate-500">Designed with ♥ in Kano.</div>
+    </div>
+  </footer>
+</div>
+
+); }
+
